@@ -43,11 +43,6 @@ app.get('/', (req,res) => {
     res.render('index.html')
 })
 
-app.get('/index', (req,res) => {
-    console.log("New task being added!!!")
-    res.render('index.html')
-})
-
 // POST REQUEST - Adding new task
 app.post('/index', (req, res) => {
     console.log('POST recieved')
