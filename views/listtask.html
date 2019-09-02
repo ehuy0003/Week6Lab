@@ -1,0 +1,41 @@
+<html>
+
+     <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <img src = 'header.jpg'/>
+        <h1>List Task</h1> </br>
+        <h1>
+                <a href="/">Home</a>
+                <a href='/newtask'>Add New Task</a>
+                <a href='/listtask'>List all Tasks</a>
+                <a href='/deletetaskID'>Delete Tasks ID</a>
+                <a href='/deletetaskall'>Delete All Completed Tasks</a>
+                <a href='/updatetask'>Update Task</a>
+        </h1>
+
+        <table>
+            <tr>
+                <th>Task ID</th>
+                <th>Name</th>
+                <th>Assign to</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Description</th>
+            </tr>
+            <% for(let i = 0; i < ar.length; i++) {%>
+            <tr>
+                <td><%= ar[i].taskID %></td>
+                <td><%= ar[i].taskName %></td>
+                <td><%= ar[i].taskHand %></td>
+                <td><%= ar[i].taskDue %></td>
+                <td><%= ar[i].taskStatus %></td>
+                <td><%= ar[i].taskDes %></td>
+            </tr>
+            <% } %>
+        </table>
+
+    </body>
+</html>
