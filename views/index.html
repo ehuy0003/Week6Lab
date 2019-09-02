@@ -7,11 +7,26 @@
     <h1>Home</h1> </br>
     <h1>
             <a href="/">Home</a>
-            <a href='/newtask'>Add New Task</a>
-            <a href='/listtask'>List all Tasks</a>
+            <a href='/index'>Add New Task</a>
+            <a href='/getall'>Get All Tasks</a>
             <a href='/deletetaskID'>Delete Tasks ID</a>
             <a href='/deletetaskall'>Delete All Completed Tasks</a>
             <a href='/updatetask'>Update Task</a>
     </h1>
+
+    <form action="/newtask" method="POST">
+        Task Name:
+        <input type = "text" name = "taskName"/> </br>
+        Assign to 
+        <input type = "string" name = "taskHandler"/> </br>
+        Task Due:
+        <input type = "date" name = "taskDue" /> </br>
+        Task Status:
+        <input type = "text" name = "taskStatus"/> </br>
+        Task Description:
+        <input type = "text" name = "taskDes" /> </br>
+        <button>Submit</button>
+    </form>
+
 </body>
 </html>

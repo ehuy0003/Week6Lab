@@ -32,7 +32,7 @@ mongoDBClient.connect(url, { useNewUrlParser: true }, function (err, client) {
         } else {
             console.log("Connected successfully to server");
             db = client.db("week6ab");
-            col = db.collection("users");
+            col = db.collection("tasks");
         }
     }
 );
@@ -43,25 +43,38 @@ app.get('/', (req,res) => {
     res.render('index.html')
 })
 
-app.get('/newtask', (req,res) => {
+app.get('/index', (req,res) => {
     console.log("New task being added!!!")
-    res.render('newtask.html')
+    res.render('index.html')
 })
 
-// Ne
-app.post('/newtask', (req, res) => {
-    let taskDetails = req.body;
+// POST REQUEST - Adding new task
+app.post('/index', (req, res) => {
     console.log('POST recieved')
+    let taskDetails = req.body;
 
-    db.c
-
+    col.insertOne({
+        id: "" + Math.floor(100000 + Math.random() * 900000),
+        name: taskDetails.taskName,
+        assigned: taskDetails.taskHandler,
+        due: taskDetails.taskDetails,
+        status: taskDetails.taskDetails,
+        description: taskDetails.taskDes,
+    })
+    
     res.render('index.html')
     db.push(req.body)
 })
 
-app.get('/listtask', (req,res) => {
+app.get('/getall', (req,res) => {
     console.log("Display lists of tasks!!!")
-    res.render('listtask.html',{ar:db})
+
+    let query = {};
+    col.find(query).sort({name:1, status:-1}).toArray(function(err,data){
+        res.send(data);
+    })
+
+    res.render('getall.html',{ar:db})
 })
 
 app.get('/deletetaskID', (req,res) => {
