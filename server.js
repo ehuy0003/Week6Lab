@@ -11,6 +11,7 @@ app.engine('html', require('ejs').renderFile);
 app.set("view engine", "html");
 app.listen(8080);
 app.use(bodyParser.urlencoded({extended: false}))
+
 app.use(express.static(__dirname + "/views"));
 app.use(express.static(__dirname + "/img"));
 app.use(express.static(__dirname + "/css"));
@@ -27,24 +28,20 @@ let col = null;
 
 //Connect to mongoDB server
 mongoDBClient.connect(url, { useNewUrlParser: true }, function (err, client) {
-        if (err) {
-            console.log("err", err);
-        } else {
-            console.log("Connected successfully to server");
-            db = client.db("week6ab");
-            col = db.collection("tasks");
-        }
-    }
-);
 
-// Homepage 
+    db = client.db("week6ab");
+    col = db.collection("tasks");
+
+});
+
+// GET INDEX POAGE
 app.get('/', (req,res) => {
     console.log('Welcome to my ToDo Application!!!')
     res.render('index.html')
 })
 
 // POST REQUEST - Adding new task
-app.post('/index', (req, res) => {
+app.post('/addnewtask', (req, res) => {
     console.log('POST recieved')
     let taskDetails = req.body;
 
@@ -66,8 +63,8 @@ app.get('/getall', (req,res) => {
 
     let query = {};
     col.find(query).sort({name:1, status:-1}).toArray(function(err,data){
-        res.send(data);
-    })
+        res.send(data)
+    });
 
     res.render('getall.html',{ar:db})
 })
